@@ -1,15 +1,24 @@
-import { http } from '../../../shared/api/http'
+import { http } from '@/shared/api/http'
 
-type LoginPayload = {
+export type LoginRequest = {
   email: string
   password: string
+
 }
 
-type LoginResponse = {
-  token: string
+export type LoginResponse = {
+  accessToken?: string
+  token?: string
+  expiresInSeconds?: number
+  user?: {
+    id?: string
+    email?: string
+    roles?: string[]
+  }
 }
 
-export const loginRequest = async (payload: LoginPayload) => {
-  const { data } = await http.post<LoginResponse>('/auth/login', payload)
+
+export const loginRequest = async (payload: LoginRequest) => {
+  const { data } = await http.post<LoginResponse>('/Auth/login', payload)
   return data
 }
