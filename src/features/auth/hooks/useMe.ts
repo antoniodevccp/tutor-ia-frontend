@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import { authStore } from '@/store/authStore'
-import { getMeRequest } from '@/api/me'
+import { authStore } from '@/features/auth/store/authStore'
+import { getMeRequest } from '@/features/auth/api/me'
 
 export const useMe = () => {
   return useQuery({
