@@ -2,6 +2,7 @@ import { Box, Button, Paper, TextField, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { useLogin } from './hooks/useLogin'
 import { useNavigate } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 
 type FormData = {
   email: string
@@ -41,6 +42,9 @@ export default function LoginPage() {
               disabled={loginMutation.isPending}
             >
               Entrar
+            </Button>
+            <Button component={RouterLink} to="/register">
+              Crear cuenta
             </Button>
           </Box>
         </form>
