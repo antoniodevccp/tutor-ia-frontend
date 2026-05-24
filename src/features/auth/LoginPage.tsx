@@ -40,8 +40,8 @@ export default function LoginPage() {
   })
 
   const onSubmit = async (data: LoginFormData) => {
-    await loginMutation.mutateAsync(data)
-    navigate('/')
+  await loginMutation.mutateAsync(data)
+  navigate('/sync')
   }
 
   return (
