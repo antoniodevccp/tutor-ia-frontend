@@ -1,73 +1,146 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Tutor IA – Frontend MVP
 
-Currently, two official plugins are available:
+Frontend del sistema Tutor IA, desarrollado en React, que permite a los usuarios interactuar con una plataforma de evaluación educativa basada en inteligencia artificial.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+⸻
 
-## React Compiler
+Tecnologías
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* React 19
+* TypeScript
+* Vite
+* React Router DOM
+* TanStack Query (React Query)
+* Axios
+* React Hook Form + Zod
+* Material UI (MUI)
+* Day.js
 
-## Expanding the ESLint configuration
+⸻
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Requisitos del sistema
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Antes de ejecutar el proyecto, asegúrate de tener instalado:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* Node.js ≥ 18 (recomendado: 20 o superior)
+* npm ≥ 9
+* Git
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Verificar versiones:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+node -v
+npm -v
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+⸻
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Instalación
+
+Clonar el repositorio:
+
+git clone https://github.com/antoniodevccp/tutor-ia-frontend.git
+cd tutor-ia-frontend
+
+Instalar dependencias:
+
+npm install
+
+⸻
+
+Ejecución en desarrollo
+
+npm run dev
+
+Por defecto, la aplicación se levanta en:
+
+http://localhost:5173
+
+(Si el puerto está ocupado, Vite usará otro automáticamente)
+
+⸻
+
+Scripts disponibles
+
+npm run dev       # Levanta servidor de desarrollo
+npm run build     # Compila el proyecto para producción
+npm run preview   # Preview del build
+npm run lint      # Ejecuta eslint
+
+⸻
+
+Configuración de API
+
+El cliente HTTP está configurado en:
+
+src/shared/api/http.ts
+
+Por defecto:
+
+baseURL: "http://localhost:5000/api"
+
+Asegúrate de que el backend esté corriendo en esa URL.
+
+⸻
+
+Autenticación
+
+El sistema utiliza autenticación basada en JWT:
+
+* Endpoint: /api/Auth/login
+* El token se guarda en localStorage
+* Se envía automáticamente en cada request mediante interceptor Axios
+
+⸻
+
+Estructura del proyecto
+
+src/
+  app/            # Configuración global (router, query client)
+  features/       # Módulos por funcionalidad
+    auth/
+    catalog/
+    attempts/
+    admin/
+  shared/         # Componentes reutilizables y utilidades
+    api/
+    ui/
+    hooks/
+    layouts/
+    types/
+
+Arquitectura basada en features → escalable y mantenible.
+
+⸻
+
+Flujo de ramas (Git)
+
+Se utiliza una estrategia basada en:
+
+* main → producción
+* develop → integración
+* feature/* → nuevas funcionalidades
+* docs/* → documentación
+
+Ejemplo:
+
+git checkout develop
+git pull
+git checkout -b feature/login
+
+⸻
+
+Estado actual del proyecto
+
+*  Setup base
+*  Routing
+*  Login UI
+*  Autenticación con JWT
+*  Integración completa con API en progreso
+
+⸻
+
+Autor
+
+Antonio Montecinos
+Ingeniero en Informática – Android Senior Developer
+:::
