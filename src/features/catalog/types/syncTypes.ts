@@ -1,19 +1,27 @@
 export type GradeLevel = {
-  id: string
+  id: number
   name: string
-  code: string
+  code?: string
 }
 
 export type Subject = {
-  id: string
+  id: number
   name: string
+  chromaDatabaseName?: string
 }
 
 export type Topic = {
-  id: string
+  id: number
   name: string
-  subjectId: string
-  gradeLevelId: string
+  materialVersion: number
+  contextNeedsRefresh: boolean
+  lastMaterialUpdatedAtUtc: string | null
+  subjectId: number
+  subjectName: string
+  gradeLevelId: number
+  gradeLevelName: string
+  chromaCollectionId: string
+  chromaCollectionName: string
 }
 
 export type Question = {
