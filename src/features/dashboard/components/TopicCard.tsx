@@ -1,11 +1,15 @@
 import { Box, Button, Chip, LinearProgress, Paper, Stack, Typography } from '@mui/material'
 import type { Topic } from '@/features/catalog/types/syncTypes'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
   topic: Topic
 }
 
 export default function TopicCard({ topic }: Props) {
+
+  const navigate = useNavigate()
+
   return (
     <Paper
       sx={{
@@ -46,7 +50,7 @@ export default function TopicCard({ topic }: Props) {
           />
         </Stack>
 
-        <Button fullWidth variant="contained">
+        <Button fullWidth variant="contained" onClick={() => navigate(`/topics/${topic.id}/questions`)}>
           Comenzar
         </Button>
       </Box>
