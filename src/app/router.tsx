@@ -10,6 +10,7 @@ import TopicsPage from '@/features/topics/pages/TopicsPage'
 import QuestionsPage from '@/features/questions/pages/QuestionsPage'
 import AnswerQuestionPage from '@/features/evaluation/pages/AnswerQuestionPage'
 import EvaluationResultPage from '@/features/evaluation/pages/EvaluationResultPage'
+import SyncRequiredRoute from '@/app/SyncRequiredRoute'
 
 export const router = createBrowserRouter([
   {
@@ -30,11 +31,13 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
-  {
-     path: '/',
+ {
+  path: '/',
   element: (
     <ProtectedRoute>
-      <AppLayout />
+      <SyncRequiredRoute>
+        <AppLayout />
+      </SyncRequiredRoute>
     </ProtectedRoute>
   ),
   children: [
@@ -43,7 +46,7 @@ export const router = createBrowserRouter([
       element: <DashboardPage />,
     },
   ],
-  },
+},
   {
   path: '/topics',
   element: (
