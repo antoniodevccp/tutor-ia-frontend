@@ -7,6 +7,9 @@ import RegisterPage from '@/features/auth/RegisterPage'
 import SyncPage from '@/features/sync/pages/SyncPage'
 import DashboardPage from '@/features/dashboard/pages/DashboardPage'
 import TopicsPage from '@/features/topics/pages/TopicsPage'
+import QuestionsPage from '@/features/questions/pages/QuestionsPage'
+import AnswerQuestionPage from '@/features/evaluation/pages/AnswerQuestionPage'
+import EvaluationResultPage from '@/features/evaluation/pages/EvaluationResultPage'
 
 export const router = createBrowserRouter([
   {
@@ -49,4 +52,28 @@ export const router = createBrowserRouter([
     </ProtectedRoute>
   ),
 },
-])
+{
+  path: '/topics/:topicId/questions',
+  element: (
+    <ProtectedRoute>
+      <QuestionsPage />
+    </ProtectedRoute>
+  ),
+},
+{
+  path: '/questions/:questionId/answer',
+  element: (
+    <ProtectedRoute>
+      <AnswerQuestionPage />
+    </ProtectedRoute>
+  ),
+},
+{
+  path: '/evaluation-result',
+  element: (
+    <ProtectedRoute>
+      <EvaluationResultPage />
+    </ProtectedRoute>
+  ),
+},
+]) 
