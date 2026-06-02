@@ -1,17 +1,24 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Button, Stack, Typography } from '@mui/material'
 import type { Topic } from '@/features/catalog/types/syncTypes'
 import TopicCard from './TopicCard'
 
 type Props = {
   topics: Topic[]
+  onViewAll?: () => void
 }
 
-export default function TopicsGrid({ topics }: Props) {
+export default function TopicsGrid({ topics, onViewAll }: Props) {
   return (
     <>
-      <Typography variant="h5" mb={2}>
-        Topics disponibles
-      </Typography>
+      <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
+        <Typography variant="h5">Topics disponibles</Typography>
+
+        {onViewAll && (
+          <Button variant="text" onClick={onViewAll}>
+            Ver todos
+          </Button>
+        )}
+      </Stack>
 
       <Box
         sx={{

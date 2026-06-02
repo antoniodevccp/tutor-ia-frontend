@@ -8,6 +8,7 @@ import TopicsGrid from '@/features/dashboard/components/TopicsGrid'
 
 import type { GradeLevel, Subject, Topic } from '@/features/catalog/types/syncTypes'
 import type { MeResponse } from '@/features/auth/api/me'
+import { useNavigate } from 'react-router-dom'
 
 type InitialSyncData = {
   me: MeResponse
@@ -18,8 +19,8 @@ type InitialSyncData = {
 
 export default function DashboardPage() {
   const theme = useTheme()
+  const navigate = useNavigate()
   const queryClient = useQueryClient()
-
   const data = queryClient.getQueryData<InitialSyncData>(['initial-sync'])
 
   const userName = data?.me.userName || data?.me.email || 'Usuario'
@@ -27,6 +28,11 @@ export default function DashboardPage() {
   const selectedSubject = data?.subjects.find((s) => s.name === 'History') ?? data?.subjects[0]
   const topics = data?.topics ?? []
 
+  const goToTopics = () => {
+  if (!selectedGrade?.id || !selectedSubject?.id) return
+
+  navigate(`/topics?gradeLevelId=${selectedGrade.id}&subjectId=${selectedSubject.id}`)
+}
   return (
     <Box
       sx={{
@@ -57,8 +63,7 @@ export default function DashboardPage() {
           selectedSubjectId={selectedSubject?.id}
         />
 
-        <TopicsGrid topics={topics} />
-      </Paper>
+        <TopicsGrid topics={topics.slice(0, 3)} onViewAll={goToTopics} />      </Paper>
     </Box>
   )
 }
