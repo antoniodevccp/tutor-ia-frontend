@@ -6,8 +6,9 @@ import ProtectedRoute from './ProtectedRoute'
 import LoginPage from '../features/auth/LoginPage'
 import RegisterPage from '@/features/auth/RegisterPage'
 
-import StartPage from '../features/catalog/StartPage'
 import SyncPage from '@/features/sync/pages/SyncPage'
+
+import DashboardPage from '@/features/dashboard/pages/DashboardPage'
 
 export const router = createBrowserRouter([
   {
@@ -28,19 +29,18 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
-
   {
-    path: '/',
-    element: (
-      <ProtectedRoute>
-        <AppLayout />
-      </ProtectedRoute>
-    ),
-    children: [
-      {
-        index: true,
-        element: <StartPage />,
-      },
-    ],
+     path: '/',
+  element: (
+    <ProtectedRoute>
+      <AppLayout />
+    </ProtectedRoute>
+  ),
+  children: [
+    {
+      index: true,
+      element: <DashboardPage />,
+    },
+  ],
   },
 ])
