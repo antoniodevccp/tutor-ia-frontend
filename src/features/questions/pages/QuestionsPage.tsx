@@ -35,7 +35,8 @@ export default function QuestionsPage() {
   const parsedTopicId = Number(topicId)
 
   const { data, isLoading, isError } = useQuestions(parsedTopicId)
-
+  const gradeLevelId = data?.[0]?.gradeLevelId
+  const subjectId = data?.[0]?.subjectId
   const topicName = data?.[0]?.topicName ?? 'Tópico'
 
   if (isLoading) {
@@ -53,7 +54,16 @@ export default function QuestionsPage() {
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default', p: { xs: 2, md: 4 } }}>
       <Paper sx={{ maxWidth: 1000, mx: 'auto', p: { xs: 2, md: 4 } }}>
-        <Button variant="text" onClick={() => navigate('/topics')}>
+        <Button
+          variant="text"
+          onClick={() => {
+            if (gradeLevelId && subjectId) {
+              navigate(`/topics?gradeLevelId=${gradeLevelId}&subjectId=${subjectId}`)
+              return
+            }
+
+            navigate('/')
+          }}>
           ← Volver a Topics
         </Button>
 
