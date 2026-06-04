@@ -138,6 +138,12 @@ export default function EvaluationResultPage() {
             >
               Resolver otra pregunta
             </Button>
+            <Button
+              variant="outlined"
+              onClick={() => navigate('/attempts')}
+            >
+              Ver mis evaluaciones
+            </Button>
           </Stack>
         </Stack>
       </Paper>

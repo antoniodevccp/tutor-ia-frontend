@@ -11,6 +11,8 @@ import QuestionsPage from '@/features/questions/pages/QuestionsPage'
 import AnswerQuestionPage from '@/features/evaluation/pages/AnswerQuestionPage'
 import EvaluationResultPage from '@/features/evaluation/pages/EvaluationResultPage'
 import SyncRequiredRoute from '@/app/SyncRequiredRoute'
+import AttemptsPage from '@/features/attempts/pages/AttemptsPage'
+import AttemptDetailPage from '@/features/attempts/pages/AttemptDetailPage'
 
 export const router = createBrowserRouter([
   {
@@ -76,6 +78,22 @@ export const router = createBrowserRouter([
   element: (
     <ProtectedRoute>
       <EvaluationResultPage />
+    </ProtectedRoute>
+  ),
+},
+{
+  path: '/attempts',
+  element: (
+    <ProtectedRoute>
+      <AttemptsPage />
+    </ProtectedRoute>
+  ),
+},
+{
+  path: '/attempts/:attemptId',
+  element: (
+    <ProtectedRoute>
+      <AttemptDetailPage />
     </ProtectedRoute>
   ),
 },

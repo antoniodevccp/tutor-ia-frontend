@@ -13,13 +13,29 @@ import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurned
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
 import { authStore } from '@/features/auth/store/authStore'
+import type { GradeLevel, Subject } from '@/features/catalog/types/syncTypes'
+import type { MeResponse } from '@/features/auth/api/me'
+
+type InitialSyncData = {
+  me: MeResponse
+  gradeLevels: GradeLevel[]
+  subjects: Subject[]
+}
 
 export default function AppMenuButton() {
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   const open = Boolean(anchorEl)
+
+  const syncData = queryClient.getQueryData<InitialSyncData>(['initial-sync'])
+
+  const selectedGrade = syncData?.gradeLevels[0]
+  const selectedSubject =
+    syncData?.subjects.find((subject) => subject.name === 'History') ?? syncData?.subjects[0]
 
   const handleClose = () => {
     setAnchorEl(null)
@@ -30,8 +46,19 @@ export default function AppMenuButton() {
     handleClose()
   }
 
+  const handleNavigateToTopics = () => {
+    if (selectedGrade?.id && selectedSubject?.id) {
+      navigate(`/topics?gradeLevelId=${selectedGrade.id}&subjectId=${selectedSubject.id}`)
+    } else {
+      navigate('/')
+    }
+
+    handleClose()
+  }
+
   const handleLogout = () => {
     authStore.logout()
+    queryClient.clear()
     handleClose()
     navigate('/login', { replace: true })
   }
@@ -65,7 +92,7 @@ export default function AppMenuButton() {
           <ListItemText>Dashboard</ListItemText>
         </MenuItem>
 
-        <MenuItem onClick={() => handleNavigate('/topics')}>
+        <MenuItem onClick={handleNavigateToTopics}>
           <ListItemIcon>
             <TopicOutlinedIcon fontSize="small" />
           </ListItemIcon>
