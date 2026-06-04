@@ -1,19 +1,5 @@
-import {
-
-  Box,
-
-  Button,
-
-  Chip,
-
-  CircularProgress,
-  Paper,
-  Stack,
-  Typography,
-} from '@mui/material'
-
+import { Box, Button, Chip, CircularProgress, Paper, Stack, Typography, } from '@mui/material'
 import { useNavigate, useParams } from 'react-router-dom'
-
 import { useQuestions } from '@/features/questions/hooks/useQuestions'
 
 const getDifficultyColor = (difficulty?: string) => {
@@ -33,7 +19,6 @@ export default function QuestionsPage() {
   const navigate = useNavigate()
   const { topicId } = useParams()
   const parsedTopicId = Number(topicId)
-
   const { data, isLoading, isError } = useQuestions(parsedTopicId)
   const gradeLevelId = data?.[0]?.gradeLevelId
   const subjectId = data?.[0]?.subjectId
@@ -77,38 +62,37 @@ export default function QuestionsPage() {
 
         <Stack spacing={2}>
 
-        <Paper
-          variant="outlined"
-          sx={{
-            p: 2,
-            display: { xs: 'none', md: 'grid' },
-            gridTemplateColumns: '48px 1fr 120px 140px',
-            gap: 2,
-            alignItems: 'center',
-            bgcolor: 'background.default',
-            borderColor: 'divider',
-          }}>
-          <Typography fontWeight={700} color="text.secondary">
-            #
-          </Typography>
-          <Typography fontWeight={700} color="text.secondary">
-            Pregunta
-          </Typography>
-          <Typography fontWeight={700} color="text.secondary" textAlign="center">
-            Dificultad
-          </Typography>
-          <Typography fontWeight={700} color="text.secondary" textAlign="center">
-            Acción
-          </Typography>
-        </Paper>
+          <Paper
+            variant="outlined"
+            sx={{
+              p: 2,
+              display: { xs: 'none', md: 'grid' },
+              gridTemplateColumns: '48px 1fr 120px 140px',
+              gap: 2,
+              alignItems: 'center',
+              bgcolor: 'background.default',
+              borderColor: 'divider',
+            }}>
+            <Typography fontWeight={700} color="text.secondary">
+              #
+            </Typography>
+            <Typography fontWeight={700} color="text.secondary">
+              Pregunta
+            </Typography>
+            <Typography fontWeight={700} color="text.secondary" textAlign="center">
+              Dificultad
+            </Typography>
+            <Typography fontWeight={700} color="text.secondary" textAlign="center">
+              Acción
+            </Typography>
+          </Paper>
 
           {data?.map((question, index) => (
             <Paper
               key={question.id}
               variant="outlined"
               sx={{
-                p: 2,
-                display: 'grid',
+                p: 2, display: 'grid',
                 gridTemplateColumns: {
                   xs: '1fr',
                   md: '48px 1fr 120px 140px',
