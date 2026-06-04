@@ -9,6 +9,7 @@ import TopicsGrid from '@/features/dashboard/components/TopicsGrid'
 import type { GradeLevel, Subject, Topic } from '@/features/catalog/types/syncTypes'
 import type { MeResponse } from '@/features/auth/api/me'
 import { useNavigate } from 'react-router-dom'
+import RecentAttemptsList from '@/features/dashboard/components/RecentAttemptsList'
 
 type InitialSyncData = {
   me: MeResponse
@@ -63,7 +64,9 @@ export default function DashboardPage() {
           selectedSubjectId={selectedSubject?.id}
         />
 
-        <TopicsGrid topics={topics.slice(0, 3)} onViewAll={goToTopics} />      </Paper>
+        <TopicsGrid topics={topics.slice(0, 3)} onViewAll={goToTopics} />     
+        <RecentAttemptsList />
+         </Paper>
     </Box>
   )
 }
