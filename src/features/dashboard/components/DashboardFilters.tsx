@@ -15,8 +15,23 @@ export default function DashboardFilters({
   selectedSubjectId,
 }: Props) {
   return (
-    <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} mb={4}>
-      <TextField select label="Nivel" value={selectedGradeLevelId ?? ''} fullWidth>
+    <Stack
+      direction={{ xs: 'column', md: 'row' }}
+      spacing={2}
+      mb={4}
+    >
+      <TextField
+        select
+        fullWidth
+        color="primary"
+        label="Curso"
+        value={selectedGradeLevelId ?? ''}
+        sx={{
+          '& .MuiOutlinedInput-root': {
+            bgcolor: 'background.paper',
+          },
+        }}
+      >
         {gradeLevels.map((level) => (
           <MenuItem key={level.id} value={level.id}>
             {level.name}
@@ -24,7 +39,18 @@ export default function DashboardFilters({
         ))}
       </TextField>
 
-      <TextField select label="Asignatura" value={selectedSubjectId ?? ''} fullWidth>
+      <TextField
+        select
+        fullWidth
+        color="primary"
+        label="Materia"
+        value={selectedSubjectId ?? ''}
+        sx={{
+          '& .MuiOutlinedInput-root': {
+            bgcolor: 'background.paper',
+          },
+        }}
+      >
         {subjects.map((subject) => (
           <MenuItem key={subject.id} value={subject.id}>
             {subject.name}

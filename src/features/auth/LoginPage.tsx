@@ -12,7 +12,6 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material'
-import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined'
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
 import { useState } from 'react'
@@ -24,6 +23,8 @@ type LoginFormData = {
   email: string
   password: string
 }
+
+const logoSrc = '/branding/tutoria-logo.png'
 
 export default function LoginPage() {
   const theme = useTheme()
@@ -40,9 +41,22 @@ export default function LoginPage() {
   })
 
   const onSubmit = async (data: LoginFormData) => {
-  await loginMutation.mutateAsync(data)
-  navigate('/sync')
+    await loginMutation.mutateAsync(data)
+    navigate('/sync')
   }
+
+  const heroGradient = `linear-gradient(
+    135deg,
+    ${theme.palette.primary.main} 0%,
+    ${theme.palette.primary.light} 55%,
+    ${theme.palette.secondary.main} 100%
+  )`
+
+  const buttonGradient = `linear-gradient(
+    90deg,
+    ${theme.palette.primary.main} 0%,
+    ${theme.palette.secondary.main} 100%
+  )`
 
   return (
     <Box
@@ -64,62 +78,62 @@ export default function LoginPage() {
           gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
           overflow: 'hidden',
           borderRadius: { xs: 0, md: 4 },
-          boxShadow: { xs: 'none', md: '0 24px 80px rgba(15, 23, 42, 0.12)' },
+          border: { xs: 'none', md: '1px solid' },
+          borderColor: 'divider',
+          bgcolor: 'background.paper',
         }}
       >
         {!isMobile && (
           <Box
             sx={{
-              position: 'relative',
               p: 6,
-              color: 'white',
-              background:
-                'linear-gradient(135deg, #5B36F2 0%, #A020F0 48%, #3B82F6 100%)',
+              color: '#FFF',
+              background: heroGradient,
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
             }}
           >
             <Box>
-              <Stack direction="row" spacing={2} alignItems="center">
-                <Box
-                  sx={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: 3,
-                    display: 'grid',
-                    placeItems: 'center',
-                    bgcolor: 'rgba(255,255,255,0.16)',
-                  }}
-                >
-                  <SchoolOutlinedIcon />
-                </Box>
+              <Typography variant="h3" color="#FFF" fontWeight={900}>
+                TutorIA
+              </Typography>
 
-                <Box>
-                  <Typography variant="h4">TutorIA</Typography>
-                  <Typography sx={{ opacity: 0.9 }}>
-                    Aprende. Practica. Mejora.
-                  </Typography>
-                </Box>
-              </Stack>
+              <Typography sx={{ color: 'rgba(255,255,255,0.92)', mt: 0.5 }}>
+                Aprende. Entiende. Crece.
+              </Typography>
             </Box>
 
             <Box
               sx={{
                 alignSelf: 'center',
-                width: '78%',
-                height: 260,
-                borderRadius: 4,
-                bgcolor: 'rgba(15, 23, 42, 0.25)',
-                display: 'grid',
-                placeItems: 'center',
-                boxShadow: '0 24px 50px rgba(15, 23, 42, 0.25)',
+                width: '82%',
+                maxWidth: 430,
+                aspectRatio: '1 / 1',
+                borderRadius: 6,
+                bgcolor: 'rgba(255,255,255,0.24)',
+                p: 3,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backdropFilter: 'blur(8px)',
               }}
             >
-              <SchoolOutlinedIcon sx={{ fontSize: 120, opacity: 0.32 }} />
+              <Box
+                component="img"
+                src={logoSrc}
+                alt="TutorIA"
+                sx={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  borderRadius: 4,
+                  bgcolor: '#FFFFFF',
+                }}
+              />
             </Box>
 
-            <Typography sx={{ opacity: 0.9 }}>
+            <Typography sx={{ color: 'rgba(255,255,255,0.92)' }}>
               Plataforma de aprendizaje inteligente
             </Typography>
           </Box>
@@ -134,32 +148,18 @@ export default function LoginPage() {
         >
           <Box width="100%" maxWidth={448}>
             {isMobile && (
-              <Stack direction="row" spacing={1.5} alignItems="center" mb={5}>
-                <Box
-                  sx={{
-                    width: 42,
-                    height: 42,
-                    borderRadius: 3,
-                    display: 'grid',
-                    placeItems: 'center',
-                    color: 'white',
-                    background:
-                      'linear-gradient(135deg, #5B36F2 0%, #A020F0 100%)',
-                  }}
-                >
-                  <SchoolOutlinedIcon />
-                </Box>
+              <Box mb={5}>
+                <Typography variant="h4" color="text.primary" fontWeight={900}>
+                  TutorIA
+                </Typography>
 
-                <Box>
-                  <Typography variant="h5">TutorIA</Typography>
-                  <Typography color="text.secondary">
-                    Aprende. Practica. Mejora.
-                  </Typography>
-                </Box>
-              </Stack>
+                <Typography color="text.secondary">
+                  Aprende. Practica. Mejora.
+                </Typography>
+              </Box>
             )}
 
-            <Typography variant="h4" mb={1}>
+            <Typography variant="h4" mb={1} color="text.primary">
               Iniciar sesión
             </Typography>
 
@@ -180,6 +180,7 @@ export default function LoginPage() {
                   placeholder="ejemplo@correo.com"
                   type="email"
                   fullWidth
+                  color="primary"
                   {...register('email', { required: true })}
                 />
 
@@ -188,19 +189,13 @@ export default function LoginPage() {
                   placeholder="••••••••"
                   type={showPassword ? 'text' : 'password'}
                   fullWidth
+                  color="primary"
                   {...register('password', { required: true })}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
-                        <IconButton
-                          edge="end"
-                          onClick={() => setShowPassword((prev) => !prev)}
-                        >
-                          {showPassword ? (
-                            <VisibilityOffOutlinedIcon />
-                          ) : (
-                            <VisibilityOutlinedIcon />
-                          )}
+                        <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
+                          {showPassword ? <VisibilityOffOutlinedIcon /> : <VisibilityOutlinedIcon />}
                         </IconButton>
                       </InputAdornment>
                     ),
@@ -208,12 +203,7 @@ export default function LoginPage() {
                 />
 
                 <Box textAlign="right">
-                  <Link
-                    component="button"
-                    type="button"
-                    underline="none"
-                    fontWeight={600}
-                  >
+                  <Link component="button" type="button" underline="none" fontWeight={700}>
                     ¿Olvidaste tu contraseña?
                   </Link>
                 </Box>
@@ -224,9 +214,8 @@ export default function LoginPage() {
                   size="large"
                   disabled={loginMutation.isPending}
                   sx={{
-                    background:
-                      'linear-gradient(90deg, #5B5EF7 0%, #A020F0 100%)',
-                    boxShadow: '0 16px 32px rgba(109, 93, 246, 0.28)',
+                    background: buttonGradient,
+                    boxShadow: `0 12px 28px ${theme.palette.primary.main}40`,
                   }}
                 >
                   {loginMutation.isPending ? 'Ingresando...' : 'Ingresar'}
@@ -234,7 +223,7 @@ export default function LoginPage() {
 
                 <Typography textAlign="center" color="text.secondary">
                   ¿No tienes cuenta?{' '}
-                  <Link underline="none" fontWeight={700}>
+                  <Link underline="none" fontWeight={800}>
                     Contacta a tu profesor
                   </Link>
                 </Typography>

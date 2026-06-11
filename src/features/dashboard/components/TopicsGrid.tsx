@@ -11,10 +11,23 @@ export default function TopicsGrid({ topics, onViewAll }: Props) {
   return (
     <>
       <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
-        <Typography variant="h5">Topics disponibles</Typography>
+        <Box>
+          <Typography variant="h5" color="text.primary">
+            Temas disponibles
+          </Typography>
+
+          <Typography variant="body2" color="text.secondary">
+            Elige un tema para comenzar a practicar
+          </Typography>
+        </Box>
 
         {onViewAll && (
-          <Button variant="text" onClick={onViewAll}>
+          <Button
+            variant="text"
+            color="primary"
+            onClick={onViewAll}
+            sx={{ fontWeight: 800 }}
+          >
             Ver todos
           </Button>
         )}

@@ -10,10 +10,36 @@ export const createAppTheme = (mode: 'light' | 'dark') => {
 
       primary: {
         main: colors.primary,
+        light: colors.primaryLight,
+        dark: colors.primaryDark,
+        contrastText: '#FFFFFF',
       },
 
       secondary: {
         main: colors.secondary,
+        light: colors.secondaryLight,
+        dark: colors.secondaryDark,
+        contrastText: '#FFFFFF',
+      },
+
+      success: {
+        main: colors.success,
+        light: colors.successLight,
+      },
+
+      warning: {
+        main: colors.warning,
+        light: colors.warningLight,
+      },
+
+      error: {
+        main: colors.error,
+        light: colors.errorLight,
+      },
+
+      info: {
+        main: colors.info,
+        light: colors.infoLight,
       },
 
       background: {
@@ -24,9 +50,10 @@ export const createAppTheme = (mode: 'light' | 'dark') => {
       text: {
         primary: colors.textPrimary,
         secondary: colors.textSecondary,
+        disabled: colors.textDisabled,
       },
 
-      divider: colors.border,
+      divider: colors.divider,
     },
 
     typography: {

@@ -7,7 +7,6 @@ type Props = {
 }
 
 export default function TopicCard({ topic }: Props) {
-
   const navigate = useNavigate()
 
   return (
@@ -22,17 +21,30 @@ export default function TopicCard({ topic }: Props) {
       <Box
         sx={{
           height: 120,
-          background: 'linear-gradient(135deg, rgba(59,130,246,0.45), rgba(124,58,237,0.45))',
+          background: (theme) => `
+            linear-gradient(
+              135deg,
+              ${theme.palette.primary.light},
+              ${theme.palette.secondary.main}
+            )
+          `,
         }}
       />
 
       <Box p={2}>
         <Stack direction="row" justifyContent="space-between" gap={1} mb={1}>
-          <Typography variant="h6" textTransform="capitalize">
+          <Typography
+            variant="h6"
+            textTransform="capitalize"
+            color="text.primary"
+            sx={{ fontWeight: 800 }}
+          >
             {topic.name}
           </Typography>
 
-          {topic.contextNeedsRefresh && <Chip size="small" color="warning" label="Actualizar" />}
+          {topic.contextNeedsRefresh && (
+            <Chip size="small" color="warning" label="Actualizar" />
+          )}
         </Stack>
 
         <Typography color="text.secondary" mb={2}>
@@ -41,17 +53,33 @@ export default function TopicCard({ topic }: Props) {
 
         <Stack direction="row" spacing={1.5} alignItems="center" mb={2}>
           <Typography variant="body2" color="text.secondary">
-            Material v{topic.materialVersion}
+            Versión {topic.materialVersion}
           </Typography>
+
           <LinearProgress
+            color={topic.contextNeedsRefresh ? 'warning' : 'success'}
             variant="determinate"
             value={topic.contextNeedsRefresh ? 45 : 100}
-            sx={{ flex: 1, height: 6, borderRadius: 999 }}
+            sx={{
+              flex: 1,
+              height: 8,
+              borderRadius: 999,
+              bgcolor: 'background.default',
+
+              '& .MuiLinearProgress-bar': {
+                borderRadius: 999,
+              },
+            }}
           />
         </Stack>
 
-        <Button fullWidth variant="contained" onClick={() => navigate(`/topics/${topic.id}/questions`)}>
-          Comenzar
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          onClick={() => navigate(`/topics/${topic.id}/questions`)}
+        >
+          Practicar
         </Button>
       </Box>
     </Paper>
