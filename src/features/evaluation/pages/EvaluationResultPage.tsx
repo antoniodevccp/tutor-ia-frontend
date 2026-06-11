@@ -17,11 +17,22 @@ export default function EvaluationResultPage() {
 
   if (!result) {
     return (
-      <Box sx={{ minHeight: '100vh', display: 'grid', placeItems: 'center', p: 3 }}>
-        <Paper sx={{ p: 4 }}>
-          <Typography mb={2}>No hay resultado disponible.</Typography>
-          <Button variant="contained" onClick={() => navigate('/')}>
-            Volver al dashboard
+      <Box
+        sx={{
+          minHeight: '100vh',
+          display: 'grid',
+          placeItems: 'center',
+          bgcolor: 'background.default',
+          p: 3,
+        }}
+      >
+        <Paper sx={{ p: 4, bgcolor: 'background.paper' }}>
+          <Typography color="text.primary" mb={2}>
+            No hay resultado disponible.
+          </Typography>
+
+          <Button variant="contained" color="primary" onClick={() => navigate('/')}>
+            Volver al inicio
           </Button>
         </Paper>
       </Box>
@@ -32,8 +43,27 @@ export default function EvaluationResultPage() {
   const gradeColor = score >= 80 ? 'success' : score >= 60 ? 'warning' : 'error'
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default', p: { xs: 2, md: 4 } }}>
-      <Paper sx={{ maxWidth: 900, mx: 'auto', p: { xs: 2, md: 4 } }}>
+    <Box
+      sx={{
+        minHeight: '100vh',
+        bgcolor: 'background.default',
+        color: 'text.primary',
+        p: { xs: 0, md: 2 },
+      }}
+    >
+      <Paper
+        elevation={0}
+        sx={{
+          maxWidth: 900,
+          mx: 'auto',
+          minHeight: { xs: '100vh', md: 'calc(100vh - 32px)' },
+          p: { xs: 2, sm: 3, md: 4 },
+          bgcolor: 'background.paper',
+          borderRadius: { xs: 0, md: 4 },
+          border: { xs: 'none', md: '1px solid' },
+          borderColor: 'divider',
+        }}
+      >
         <Stack
           direction={{ xs: 'column', sm: 'row' }}
           justifyContent="space-between"
@@ -43,19 +73,28 @@ export default function EvaluationResultPage() {
         >
           <Button
             variant="text"
+            color="primary"
             onClick={() => (topicId ? navigate(`/topics/${topicId}/questions`) : navigate('/'))}
           >
             ← Volver a preguntas
           </Button>
 
-          <Chip label="Evaluación completada" color="success" />
+          <Chip label="Evaluación completada" color="success" sx={{ fontWeight: 700 }} />
         </Stack>
 
-        <Typography variant="h4" mb={3}>
+        <Typography variant="h4" color="text.primary" mb={3}>
           Resultado de tu evaluación
         </Typography>
 
-        <Paper variant="outlined" sx={{ p: 3, mb: 3 }}>
+        <Paper
+          variant="outlined"
+          sx={{
+            p: 3,
+            mb: 3,
+            bgcolor: 'background.paper',
+            borderColor: 'divider',
+          }}
+        >
           <Stack
             direction={{ xs: 'column', md: 'row' }}
             divider={<Divider orientation="vertical" flexItem />}
@@ -64,14 +103,14 @@ export default function EvaluationResultPage() {
             spacing={3}
           >
             <Box textAlign="center">
-              <Typography variant="h5" color={`${gradeColor}.main`}>
+              <Typography variant="h5" color={`${gradeColor}.main`} fontWeight={800}>
                 {result.grade}
               </Typography>
               <Typography color="text.secondary">Calificación</Typography>
             </Box>
 
             <Box textAlign="center">
-              <Typography variant="h5" color={`${gradeColor}.main`}>
+              <Typography variant="h5" color={`${gradeColor}.main`} fontWeight={800}>
                 {score} / 100
               </Typography>
               <Typography color="text.secondary">Puntaje</Typography>
@@ -81,10 +120,19 @@ export default function EvaluationResultPage() {
           </Stack>
         </Paper>
 
-        <Paper variant="outlined" sx={{ p: 3, mb: 3 }}>
-          <Typography fontWeight={800} mb={1}>
+        <Paper
+          variant="outlined"
+          sx={{
+            p: 3,
+            mb: 3,
+            bgcolor: 'background.default',
+            borderColor: 'divider',
+          }}
+        >
+          <Typography fontWeight={800} color="text.primary" mb={1}>
             Feedback
           </Typography>
+
           <Typography color="text.secondary">{result.feedback}</Typography>
         </Paper>
 
@@ -114,37 +162,71 @@ export default function EvaluationResultPage() {
             variant="outlined"
             sx={{
               p: 2,
-              bgcolor: 'rgba(59, 130, 246, 0.08)',
-              borderColor: 'rgba(59, 130, 246, 0.25)',
+              bgcolor: 'info.light',
+              borderColor: 'info.main',
             }}
           >
-            <Typography fontWeight={800} color="primary.main" mb={1}>
+            <Typography fontWeight={800} color="info.main" mb={1}>
               Sugerencia de mejora
             </Typography>
+
             <Typography color="text.secondary">{result.suggestedImprovement}</Typography>
           </Paper>
 
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} pt={2}>
-            <Button variant="outlined" fullWidth onClick={() => navigate('/')}>
-              Volver al dashboard
-            </Button>
+          <Paper
+            variant="outlined"
+            sx={{
+              mt: 3,
+              p: 3,
+              bgcolor: 'background.paper',
+              borderColor: 'divider',
+            }}
+          >
+            <Typography variant="h6" color="text.primary" mb={1}>
+              ¿Qué deseas hacer ahora?
+            </Typography>
 
-            <Button
-              variant="contained"
-              fullWidth
-              onClick={() =>
-                topicId ? navigate(`/topics/${topicId}/questions`) : navigate('/')
-              }
-            >
-              Resolver otra pregunta
-            </Button>
-            <Button
-              variant="outlined"
-              onClick={() => navigate('/attempts')}
-            >
-              Ver mis evaluaciones
-            </Button>
-          </Stack>
+            <Typography color="text.secondary" mb={3}>
+              Continúa practicando o revisa tu progreso.
+            </Typography>
+
+            <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
+              <Button
+                size="large"
+                variant="contained"
+                color="primary"
+                fullWidth
+                sx={{ py: 1.5 }}
+                onClick={() =>
+                  topicId ? navigate(`/topics/${topicId}/questions`) : navigate('/')
+                }
+              >
+                Resolver otra pregunta
+              </Button>
+
+              <Button
+                size="large"
+                variant="outlined"
+                color="primary"
+                fullWidth
+                sx={{ py: 1.5 }}
+                onClick={() => navigate('/attempts')}
+              >
+                Ver mis evaluaciones
+              </Button>
+
+              <Button
+                size="large"
+                variant="text"
+                color="primary"
+                fullWidth
+                sx={{ py: 1.5 }}
+                onClick={() => navigate('/')}
+              >
+                Inicio
+              </Button>
+            </Stack>
+          </Paper>
         </Stack>
       </Paper>
     </Box>
@@ -164,7 +246,7 @@ function FeedbackBlock({ title, color, items, emptyText }: FeedbackBlockProps) {
       variant="outlined"
       sx={{
         p: 2,
-        bgcolor: `${color}.50`,
+        bgcolor: `${color}.light`,
         borderColor: `${color}.main`,
       }}
     >
@@ -175,9 +257,9 @@ function FeedbackBlock({ title, color, items, emptyText }: FeedbackBlockProps) {
       {items.length === 0 ? (
         <Typography color="text.secondary">{emptyText}</Typography>
       ) : (
-        <Stack component="ul" sx={{ pl: 3, m: 0 }}>
+        <Stack component="ul" sx={{ pl: 3, m: 0 }} spacing={0.5}>
           {items.map((item) => (
-            <Typography component="li" key={item}>
+            <Typography component="li" key={item} color="text.primary">
               {item}
             </Typography>
           ))}

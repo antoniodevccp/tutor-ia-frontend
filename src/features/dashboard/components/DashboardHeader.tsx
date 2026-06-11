@@ -17,15 +17,51 @@ export default function DashboardHeader({ userName, subjectName }: Props) {
       mb={3}
     >
       <Box>
-        <Typography variant="h4">Dashboard</Typography>
-        <Typography color="text.secondary">{subjectName ?? 'Asignatura'}</Typography>
+        <Typography
+          variant="h4"
+          color="text.primary"
+          sx={{ fontWeight: 800 }}
+        >
+          Mi Aprendizaje
+        </Typography>
+
+        <Typography
+          sx={{
+            color: 'primary.main',
+            fontWeight: 700,
+          }}
+        >
+          {subjectName ?? 'Asignatura'}
+        </Typography>
       </Box>
 
       <Stack direction="row" spacing={1.5} alignItems="center">
-        <Avatar sx={{ bgcolor: 'primary.main' }}>{initials}</Avatar>
+        <Avatar
+          sx={{
+            bgcolor: 'primary.main',
+            color: 'primary.contrastText',
+            width: 52,
+            height: 52,
+            fontWeight: 800,
+            boxShadow: (theme) =>
+              `0 4px 12px ${theme.palette.primary.main}40`,
+          }}
+        >
+          {initials}
+        </Avatar>
+
         <Box>
-          <Typography fontWeight={700}>{userName}</Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            fontWeight={800}
+            color="text.primary"
+          >
+            {userName}
+          </Typography>
+
+          <Typography
+            variant="body2"
+            color="text.secondary"
+          >
             Estudiante
           </Typography>
         </Box>

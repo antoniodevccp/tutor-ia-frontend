@@ -5,14 +5,28 @@ type Props = {
 }
 
 export default function ScoreCircle({ score }: Props) {
+  const scoreColor =
+    score >= 80
+      ? 'success.main'
+      : score >= 60
+        ? 'warning.main'
+        : 'error.main'
+
   return (
-    <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+    <Box
+      sx={{
+        position: 'relative',
+        display: 'inline-flex',
+      }}
+    >
       <CircularProgress
         variant="determinate"
         value={100}
         size={92}
         thickness={5}
-        sx={{ color: 'rgba(148, 163, 184, 0.2)' }}
+        sx={{
+          color: 'divider',
+        }}
       />
 
       <CircularProgress
@@ -21,7 +35,7 @@ export default function ScoreCircle({ score }: Props) {
         size={92}
         thickness={5}
         sx={{
-          color: score >= 80 ? 'success.main' : score >= 60 ? 'warning.main' : 'error.main',
+          color: scoreColor,
           position: 'absolute',
           left: 0,
         }}
@@ -36,7 +50,13 @@ export default function ScoreCircle({ score }: Props) {
           justifyContent: 'center',
         }}
       >
-        <Typography fontWeight={800}>{score}%</Typography>
+        <Typography
+          variant="h6"
+          fontWeight={800}
+          color="text.primary"
+        >
+          {score}%
+        </Typography>
       </Box>
     </Box>
   )
